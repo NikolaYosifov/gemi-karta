@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bba0eeb6c44e9eda7fb8dd3c5bc81a11 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 26px; left: 26px; width: 320px; z-index:9999;
+background-color: white; padding: 12px 12px 10px 12px; border: 1px solid #999;
+font-size: 13px; line-height: 1.35; box-shadow: 0 1px 6px rgba(0,0,0,0.2);">
+<b>Легенда</b><br>
+Кръговете показват <b>брой екземпляри</b>.<br>
+Размерът на кръга е пропорционален на броя.<br><span style="font-size:12px; color:#444;">При щракване върху синия кръг се показват кат. №.</span><br>
+<div style="margin:8px 0 4px 0;"><b>Примерни размери:</b></div>
+<div><svg width="230" height="70" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="31.429873905921266" r="7.1" fill="#3388ff" fill-opacity="0.55" stroke="black" stroke-width="1"/><text x="20" y="67" text-anchor="middle" font-size="11">2</text><circle cx="58" cy="31.429873905921266" r="11.0" fill="#3388ff" fill-opacity="0.55" stroke="black" stroke-width="1"/><text x="58" y="67" text-anchor="middle" font-size="11">10</text><circle cx="96" cy="31.429873905921266" r="15.0" fill="#3388ff" fill-opacity="0.55" stroke="black" stroke-width="1"/><text x="96" y="67" text-anchor="middle" font-size="11">25</text><circle cx="134" cy="31.429873905921266" r="19.6" fill="#3388ff" fill-opacity="0.55" stroke="black" stroke-width="1"/><text x="134" y="67" text-anchor="middle" font-size="11">50</text><circle cx="186" cy="31.429873905921266" r="23.4" fill="#3388ff" fill-opacity="0.55" stroke="black" stroke-width="1"/><text x="186" y="67" text-anchor="middle" font-size="11">78</text></svg></div>
+</div>
+    
+            <div class="folium-map" id="map_bba0eeb6c44e9eda7fb8dd3c5bc81a11" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_bba0eeb6c44e9eda7fb8dd3c5bc81a11 = L.map(
+                "map_bba0eeb6c44e9eda7fb8dd3c5bc81a11",
+                {
+                    center: [43.05, 25.25],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+
+            
+
+        
+    
+            var tile_layer_4dc1544ee01434adfcd3a61f726127d5 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_4dc1544ee01434adfcd3a61f726127d5.addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+            var circle_marker_8d38c7bbd05be90ad00fab0660917a68 = L.circleMarker(
+                [43.6138, 25.39395],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.429873905921266, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_086bf70253e4820855e6acbf05baabb8 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_664f9217a327b633b1131c932d46e366 = $(`<div id="html_664f9217a327b633b1131c932d46e366" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Novae / Свищовски район</b><br>     <b>Брой:</b> 78<br>     <b>Локализация:</b> точен античен център<br>     <b>Каталожни номера:</b><br>кат. № 4, 8, 10–11, 13, 28, 42–43, 54–56, 59, 74, 78, 80, 82, 97, 102, 105, 107, 114–115, 137, 141, 157, 168–170, 179, 186–187, 191, 199, 202, 206, 210, 216, 218, 220–221, 223, 229, 231, 233, 236, 247–248, 262, 279, 286–292, 295, 303–305, 310, 312–313, 318, 320–321, 323, 325–326, 330, 344–345, 348, 351, 357, 364, 375–376     </div>     </div>`)[0];
+                popup_086bf70253e4820855e6acbf05baabb8.setContent(html_664f9217a327b633b1131c932d46e366);
+            
+        
+
+        circle_marker_8d38c7bbd05be90ad00fab0660917a68.bindPopup(popup_086bf70253e4820855e6acbf05baabb8)
+        ;
+
+        
+    
+    
+            circle_marker_8d38c7bbd05be90ad00fab0660917a68.bindTooltip(
+                `<div>
+                     Novae / Свищовски район — 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7ae684cab48f03a9cb59bb30f6299662 = L.circleMarker(
+                [42.14206, 24.74964],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.6413057686842, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_8b1656c981917be0b4c08f70ba550062 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_2671fff5374029c90b84fc44adf01261 = $(`<div id="html_2671fff5374029c90b84fc44adf01261" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Philippopolis / Пловдивски район</b><br>     <b>Брой:</b> 28<br>     <b>Локализация:</b> точен градски център<br>     <b>Каталожни номера:</b><br>кат. № 19–20, 44, 65–66, 85, 103, 112, 129–132, 134, 138, 205, 219, 222, 241, 259, 266, 278, 307, 341, 368, 378, 381–383     </div>     </div>`)[0];
+                popup_8b1656c981917be0b4c08f70ba550062.setContent(html_2671fff5374029c90b84fc44adf01261);
+            
+        
+
+        circle_marker_7ae684cab48f03a9cb59bb30f6299662.bindPopup(popup_8b1656c981917be0b4c08f70ba550062)
+        ;
+
+        
+    
+    
+            circle_marker_7ae684cab48f03a9cb59bb30f6299662.bindTooltip(
+                `<div>
+                     Philippopolis / Пловдивски район — 28
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_647df153f5a312db43e2c1eb6859211b = L.circleMarker(
+                [43.813575, 22.912273],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.318914671611546, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_821fc55232348bf2ce342b140268f7c6 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_d22940c874d1e76580b921b6c5a5a49d = $(`<div id="html_d22940c874d1e76580b921b6c5a5a49d" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Ratiaria / Арчар</b><br>     <b>Брой:</b> 22<br>     <b>Локализация:</b> точен античен център<br>     <b>Каталожни номера:</b><br>кат. № 37, 40, 45, 48–49, 76, 87, 98, 123, 128, 154, 158, 175, 200, 213, 215, 225, 239, 296, 343, 372, 374     </div>     </div>`)[0];
+                popup_821fc55232348bf2ce342b140268f7c6.setContent(html_d22940c874d1e76580b921b6c5a5a49d);
+            
+        
+
+        circle_marker_647df153f5a312db43e2c1eb6859211b.bindPopup(popup_821fc55232348bf2ce342b140268f7c6)
+        ;
+
+        
+    
+    
+            circle_marker_647df153f5a312db43e2c1eb6859211b.bindTooltip(
+                `<div>
+                     Ratiaria / Арчар — 22
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5ea88735e25908fa56fa2438677862f1 = L.circleMarker(
+                [43.52, 23.78],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.081666528902849, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_b48a930116eed7e8ba55df961ee8ec7b = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_4491a6157b0bc5e0d5340adaec8aa0a9 = $(`<div id="html_4491a6157b0bc5e0d5340adaec8aa0a9" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Врачанско–Оряховски район</b><br>     <b>Брой:</b> 21<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 15, 38, 53, 58, 92, 108, 122, 160, 167, 184, 198, 211–212, 234, 250, 252, 282, 284, 293, 359, 371     </div>     </div>`)[0];
+                popup_b48a930116eed7e8ba55df961ee8ec7b.setContent(html_4491a6157b0bc5e0d5340adaec8aa0a9);
+            
+        
+
+        circle_marker_5ea88735e25908fa56fa2438677862f1.bindPopup(popup_b48a930116eed7e8ba55df961ee8ec7b)
+        ;
+
+        
+    
+    
+            circle_marker_5ea88735e25908fa56fa2438677862f1.bindTooltip(
+                `<div>
+                     Врачанско–Оряховски район — 21
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5df717e5a91c0fdf1717e0efea9a2327 = L.circleMarker(
+                [42.602631, 27.394352],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.520563361656318, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_be658b826f1022fb900decfd4641d12d = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_67ce6457ae2da7c94dbbcf92713be397 = $(`<div id="html_67ce6457ae2da7c94dbbcf92713be397" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Aquae Calidae</b><br>     <b>Брой:</b> 15<br>     <b>Локализация:</b> точен античен център<br>     <b>Каталожни номера:</b><br>кат. № 72, 81, 104, 106, 135, 152–153, 163, 176, 242, 261, 267, 314, 358, 365     </div>     </div>`)[0];
+                popup_be658b826f1022fb900decfd4641d12d.setContent(html_67ce6457ae2da7c94dbbcf92713be397);
+            
+        
+
+        circle_marker_5df717e5a91c0fdf1717e0efea9a2327.bindPopup(popup_be658b826f1022fb900decfd4641d12d)
+        ;
+
+        
+    
+    
+            circle_marker_5df717e5a91c0fdf1717e0efea9a2327.bindTooltip(
+                `<div>
+                     Aquae Calidae — 15
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_29547b83fbfacb533c10fe7629c6c3d6 = L.circleMarker(
+                [43.813889, 23.236111],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.932212806020777, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_3db76cf91f359a76305430cb070b6d7c = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_a5c6a618a58a83f9d4c71c225344c6d6 = $(`<div id="html_a5c6a618a58a83f9d4c71c225344c6d6" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Almus / Лом</b><br>     <b>Брой:</b> 13<br>     <b>Локализация:</b> точен градски център<br>     <b>Каталожни номера:</b><br>кат. № 23–26, 51, 67, 75, 155, 190, 271, 299, 309, 349     </div>     </div>`)[0];
+                popup_3db76cf91f359a76305430cb070b6d7c.setContent(html_a5c6a618a58a83f9d4c71c225344c6d6);
+            
+        
+
+        circle_marker_29547b83fbfacb533c10fe7629c6c3d6.bindPopup(popup_3db76cf91f359a76305430cb070b6d7c)
+        ;
+
+        
+    
+    
+            circle_marker_29547b83fbfacb533c10fe7629c6c3d6.bindTooltip(
+                `<div>
+                     Almus / Лом — 13
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_60449180ddbb524727a6c0fb711e1632 = L.circleMarker(
+                [43.71042, 24.466133],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.621023553303061, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_00c22050158ce3e765adb272da506ed7 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_35c9e04d314e0a90065b70ca8270ba21 = $(`<div id="html_35c9e04d314e0a90065b70ca8270ba21" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Ulpia Oescus / Гиген</b><br>     <b>Брой:</b> 12<br>     <b>Локализация:</b> точен античен център<br>     <b>Каталожни номера:</b><br>кат. № 62–63, 77, 99, 133, 139, 207, 251, 258, 275, 322, 353     </div>     </div>`)[0];
+                popup_00c22050158ce3e765adb272da506ed7.setContent(html_35c9e04d314e0a90065b70ca8270ba21);
+            
+        
+
+        circle_marker_60449180ddbb524727a6c0fb711e1632.bindPopup(popup_00c22050158ce3e765adb272da506ed7)
+        ;
+
+        
+    
+    
+            circle_marker_60449180ddbb524727a6c0fb711e1632.bindTooltip(
+                `<div>
+                     Ulpia Oescus / Гиген — 12
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6ca84b36a6af61dec21284cb6632b97c = L.circleMarker(
+                [43.217925, 25.612232],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.957010852370436, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_193cdc5d5ccc98f8de7382470f68b1f7 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_f87bbe075fecae84b4dafb2372197d34 = $(`<div id="html_f87bbe075fecae84b4dafb2372197d34" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Nicopolis ad Istrum / Никюп</b><br>     <b>Брой:</b> 10<br>     <b>Локализация:</b> точен античен център<br>     <b>Каталожни номера:</b><br>кат. № 6, 32–33, 183, 189, 214, 240, 276, 333, 366     </div>     </div>`)[0];
+                popup_193cdc5d5ccc98f8de7382470f68b1f7.setContent(html_f87bbe075fecae84b4dafb2372197d34);
+            
+        
+
+        circle_marker_6ca84b36a6af61dec21284cb6632b97c.bindPopup(popup_193cdc5d5ccc98f8de7382470f68b1f7)
+        ;
+
+        
+    
+    
+            circle_marker_6ca84b36a6af61dec21284cb6632b97c.bindTooltip(
+                `<div>
+                     Nicopolis ad Istrum / Никюп — 10
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eccdc2f31007543dc1ecfdbb286ce0f2 = L.circleMarker(
+                [43.2002, 27.918],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.600000000000001, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_c5229e05dbc4524ba4209ff78e7ef443 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_a6b4d17102c09d529aab95d563d7784f = $(`<div id="html_a6b4d17102c09d529aab95d563d7784f" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Odessos / Варненски район</b><br>     <b>Брой:</b> 9<br>     <b>Локализация:</b> точен античен/градски център<br>     <b>Каталожни номера:</b><br>кат. № 2, 35, 68, 109–110, 140, 227, 253, 260     </div>     </div>`)[0];
+                popup_c5229e05dbc4524ba4209ff78e7ef443.setContent(html_a6b4d17102c09d529aab95d563d7784f);
+            
+        
+
+        circle_marker_eccdc2f31007543dc1ecfdbb286ce0f2.bindPopup(popup_c5229e05dbc4524ba4209ff78e7ef443)
+        ;
+
+        
+    
+    
+            circle_marker_eccdc2f31007543dc1ecfdbb286ce0f2.bindTooltip(
+                `<div>
+                     Odessos / Варненски район — 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_44b0f3b50d15c0ef49123326654e2466 = L.circleMarker(
+                [44.121183, 27.259474],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.388877434122993, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_f74477b27046567b0eb5184e91d7e1f2 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_fa6295d1d430d28be04f41dc8925617c = $(`<div id="html_fa6295d1d430d28be04f41dc8925617c" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Durostorum / Силистра</b><br>     <b>Брой:</b> 6<br>     <b>Локализация:</b> точен античен/градски център<br>     <b>Каталожни номера:</b><br>кат. № 70, 83, 171, 237, 311, 316     </div>     </div>`)[0];
+                popup_f74477b27046567b0eb5184e91d7e1f2.setContent(html_fa6295d1d430d28be04f41dc8925617c);
+            
+        
+
+        circle_marker_44b0f3b50d15c0ef49123326654e2466.bindPopup(popup_f74477b27046567b0eb5184e91d7e1f2)
+        ;
+
+        
+    
+    
+            circle_marker_44b0f3b50d15c0ef49123326654e2466.bindTooltip(
+                `<div>
+                     Durostorum / Силистра — 6
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a403f56778b5880105c4bf730d19aca0 = L.circleMarker(
+                [43.417042, 24.606684],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.4, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_f74745687eb11f84afe1b34f57b899ea = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_d13e88595af091c70bb12b9ef8ab3b0b = $(`<div id="html_d13e88595af091c70bb12b9ef8ab3b0b" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Плевенски район</b><br>     <b>Брой:</b> 4<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 86, 193, 317, 355     </div>     </div>`)[0];
+                popup_f74745687eb11f84afe1b34f57b899ea.setContent(html_d13e88595af091c70bb12b9ef8ab3b0b);
+            
+        
+
+        circle_marker_a403f56778b5880105c4bf730d19aca0.bindPopup(popup_f74745687eb11f84afe1b34f57b899ea)
+        ;
+
+        
+    
+    
+            circle_marker_a403f56778b5880105c4bf730d19aca0.bindTooltip(
+                `<div>
+                     Плевенски район — 4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_43efd080eb7de4df620bba0da6f55598 = L.circleMarker(
+                [42.31, 26.57],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.4, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_8a926e225536ba54909e92d67a60b722 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_20adaac95f1bf3332cdb3d27f671172f = $(`<div id="html_20adaac95f1bf3332cdb3d27f671172f" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Ямболско–Елховски район</b><br>     <b>Брой:</b> 4<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 113, 196, 301, 306     </div>     </div>`)[0];
+                popup_8a926e225536ba54909e92d67a60b722.setContent(html_20adaac95f1bf3332cdb3d27f671172f);
+            
+        
+
+        circle_marker_43efd080eb7de4df620bba0da6f55598.bindPopup(popup_8a926e225536ba54909e92d67a60b722)
+        ;
+
+        
+    
+    
+            circle_marker_43efd080eb7de4df620bba0da6f55598.bindTooltip(
+                `<div>
+                     Ямболско–Елховски район — 4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f0f5922571acf71554ee72b339016a8c = L.circleMarker(
+                [42.697708, 23.321868],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.810511776651531, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_57e5a527e2fc3bd8d78a934f75413011 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_b13f7cc6ae7866712f932984da8cbe84 = $(`<div id="html_b13f7cc6ae7866712f932984da8cbe84" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Serdica / Софийски район</b><br>     <b>Брой:</b> 3<br>     <b>Локализация:</b> точен градски център<br>     <b>Каталожни номера:</b><br>кат. № 1, 46, 332     </div>     </div>`)[0];
+                popup_57e5a527e2fc3bd8d78a934f75413011.setContent(html_b13f7cc6ae7866712f932984da8cbe84);
+            
+        
+
+        circle_marker_f0f5922571acf71554ee72b339016a8c.bindPopup(popup_57e5a527e2fc3bd8d78a934f75413011)
+        ;
+
+        
+    
+    
+            circle_marker_f0f5922571acf71554ee72b339016a8c.bindTooltip(
+                `<div>
+                     Serdica / Софийски район — 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_57e62ded8dc3b3bfaa80690a3fc00dae = L.circleMarker(
+                [43.995555, 22.875278],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.810511776651531, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_a8ad7a9d2e47eb596a7bd7b02fa9b05b = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_fd6083f1adddfb88345cf6406a8346c5 = $(`<div id="html_fd6083f1adddfb88345cf6406a8346c5" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Видински район</b><br>     <b>Брой:</b> 3<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 162, 264, 354     </div>     </div>`)[0];
+                popup_a8ad7a9d2e47eb596a7bd7b02fa9b05b.setContent(html_fd6083f1adddfb88345cf6406a8346c5);
+            
+        
+
+        circle_marker_57e62ded8dc3b3bfaa80690a3fc00dae.bindPopup(popup_a8ad7a9d2e47eb596a7bd7b02fa9b05b)
+        ;
+
+        
+    
+    
+            circle_marker_57e62ded8dc3b3bfaa80690a3fc00dae.bindTooltip(
+                `<div>
+                     Видински район — 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8564f54e411ab27f5dca2ba4a688612c = L.circleMarker(
+                [43.136389, 24.715],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.810511776651531, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_98711db19f4e9630b9123830f88d02e9 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_baa4760a9b8bfdf9a6ea259c5ed86981 = $(`<div id="html_baa4760a9b8bfdf9a6ea259c5ed86981" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Ловешки район</b><br>     <b>Брой:</b> 3<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 185, 274, 308     </div>     </div>`)[0];
+                popup_98711db19f4e9630b9123830f88d02e9.setContent(html_baa4760a9b8bfdf9a6ea259c5ed86981);
+            
+        
+
+        circle_marker_8564f54e411ab27f5dca2ba4a688612c.bindPopup(popup_98711db19f4e9630b9123830f88d02e9)
+        ;
+
+        
+    
+    
+            circle_marker_8564f54e411ab27f5dca2ba4a688612c.bindTooltip(
+                `<div>
+                     Ловешки район — 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b92baf0e0275013eeaf0e784d3b725bf = L.circleMarker(
+                [43.407778, 23.225],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.810511776651531, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_f3e9e78f28551321ba0aa9478a694385 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_2839c647030f77dfd42af896c174186e = $(`<div id="html_2839c647030f77dfd42af896c174186e" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Монтански район</b><br>     <b>Брой:</b> 3<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 36, 144, 265     </div>     </div>`)[0];
+                popup_f3e9e78f28551321ba0aa9478a694385.setContent(html_2839c647030f77dfd42af896c174186e);
+            
+        
+
+        circle_marker_b92baf0e0275013eeaf0e784d3b725bf.bindPopup(popup_f3e9e78f28551321ba0aa9478a694385)
+        ;
+
+        
+    
+    
+            circle_marker_b92baf0e0275013eeaf0e784d3b725bf.bindTooltip(
+                `<div>
+                     Монтански район — 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5b3f184fef387b3455172582cf57c60f = L.circleMarker(
+                [43.2425, 25.3219],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.810511776651531, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_96832ff0ea6f13f3e30499c4337027b2 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_9a1df55d261c5ce82d8760d9274628c6 = $(`<div id="html_9a1df55d261c5ce82d8760d9274628c6" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Павликени / Великотърновски район</b><br>     <b>Брой:</b> 3<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 22, 188, 379     </div>     </div>`)[0];
+                popup_96832ff0ea6f13f3e30499c4337027b2.setContent(html_9a1df55d261c5ce82d8760d9274628c6);
+            
+        
+
+        circle_marker_5b3f184fef387b3455172582cf57c60f.bindPopup(popup_96832ff0ea6f13f3e30499c4337027b2)
+        ;
+
+        
+    
+    
+            circle_marker_5b3f184fef387b3455172582cf57c60f.bindTooltip(
+                `<div>
+                     Павликени / Великотърновски район — 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_796d5c8ee2954517353c5e1ba15c5f06 = L.circleMarker(
+                [42.4258, 25.6345],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.810511776651531, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_84a02ecc24d4bba776a79a672924028d = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_d63272995ba56d8f9ea31647e94c76ac = $(`<div id="html_d63272995ba56d8f9ea31647e94c76ac" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Старозагорски / Търновски район</b><br>     <b>Брой:</b> 3<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 121, 192, 300     </div>     </div>`)[0];
+                popup_84a02ecc24d4bba776a79a672924028d.setContent(html_d63272995ba56d8f9ea31647e94c76ac);
+            
+        
+
+        circle_marker_796d5c8ee2954517353c5e1ba15c5f06.bindPopup(popup_84a02ecc24d4bba776a79a672924028d)
+        ;
+
+        
+    
+    
+            circle_marker_796d5c8ee2954517353c5e1ba15c5f06.bindTooltip(
+                `<div>
+                     Старозагорски / Търновски район — 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_455e00bcae857c33c9fd3c173ce07765 = L.circleMarker(
+                [42.6194, 25.393],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.11126983722081, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_8783ef0554dd6a926734e10cf82dba45 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_6433301c7e6fc09e4fd1e9704160c147 = $(`<div id="html_6433301c7e6fc09e4fd1e9704160c147" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Казанлък</b><br>     <b>Брой:</b> 2<br>     <b>Локализация:</b> точен градски център<br>     <b>Каталожни номера:</b><br>кат. № 47, 331     </div>     </div>`)[0];
+                popup_8783ef0554dd6a926734e10cf82dba45.setContent(html_6433301c7e6fc09e4fd1e9704160c147);
+            
+        
+
+        circle_marker_455e00bcae857c33c9fd3c173ce07765.bindPopup(popup_8783ef0554dd6a926734e10cf82dba45)
+        ;
+
+        
+    
+    
+            circle_marker_455e00bcae857c33c9fd3c173ce07765.bindTooltip(
+                `<div>
+                     Казанлък — 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4e83824272b7061ad8b6bd4bb366af8a = L.circleMarker(
+                [43.278, 27.117],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.11126983722081, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_7e32afe8f40c23c0b15046c9d859421b = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_9263728b2f9dfc65355376d06954a804 = $(`<div id="html_9263728b2f9dfc65355376d06954a804" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Мадара / Шуменски район</b><br>     <b>Брой:</b> 2<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 238, 255     </div>     </div>`)[0];
+                popup_7e32afe8f40c23c0b15046c9d859421b.setContent(html_9263728b2f9dfc65355376d06954a804);
+            
+        
+
+        circle_marker_4e83824272b7061ad8b6bd4bb366af8a.bindPopup(popup_7e32afe8f40c23c0b15046c9d859421b)
+        ;
+
+        
+    
+    
+            circle_marker_4e83824272b7061ad8b6bd4bb366af8a.bindTooltip(
+                `<div>
+                     Мадара / Шуменски район — 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c74d9e75aadeff8cfeda1fbe9d49d02c = L.circleMarker(
+                [42.1928, 24.3336],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.11126983722081, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_9bdb53c67252f20568c524ad3b98b803 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_05e2dc86d5623ffe7ca85e0b3b077015 = $(`<div id="html_05e2dc86d5623ffe7ca85e0b3b077015" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Пазарджишки район</b><br>     <b>Брой:</b> 2<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 14, 30     </div>     </div>`)[0];
+                popup_9bdb53c67252f20568c524ad3b98b803.setContent(html_05e2dc86d5623ffe7ca85e0b3b077015);
+            
+        
+
+        circle_marker_c74d9e75aadeff8cfeda1fbe9d49d02c.bindPopup(popup_9bdb53c67252f20568c524ad3b98b803)
+        ;
+
+        
+    
+    
+            circle_marker_c74d9e75aadeff8cfeda1fbe9d49d02c.bindTooltip(
+                `<div>
+                     Пазарджишки район — 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a07ca2d4c15c96c461bd7f2d2e4b77d0 = L.circleMarker(
+                [42.2, 25.3333],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.11126983722081, "stroke": true, "weight": 1}
+            ).addTo(map_bba0eeb6c44e9eda7fb8dd3c5bc81a11);
+        
+    
+        var popup_9bb38b39dd513df727a15fbafd3fc083 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_6d85e8c25bdb6fbc56e30d0c2344d85b = $(`<div id="html_6d85e8c25bdb6fbc56e30d0c2344d85b" style="width: 100.0%; height: 100.0%;">     <div style="width:360px">     <b>Чирпански район</b><br>     <b>Брой:</b> 2<br>     <b>Локализация:</b> условен център на район<br>     <b>Каталожни номера:</b><br>кат. № 89, 342     </div>     </div>`)[0];
+                popup_9bb38b39dd513df727a15fbafd3fc083.setContent(html_6d85e8c25bdb6fbc56e30d0c2344d85b);
+            
+        
+
+        circle_marker_a07ca2d4c15c96c461bd7f2d2e4b77d0.bindPopup(popup_9bb38b39dd513df727a15fbafd3fc083)
+        ;
+
+        
+    
+    
+            circle_marker_a07ca2d4c15c96c461bd7f2d2e4b77d0.bindTooltip(
+                `<div>
+                     Чирпански район — 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
